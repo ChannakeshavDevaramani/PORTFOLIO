@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio - Video Editing</title>
+  <link rel="icon" href="Asset 15.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      font-family: 'Press Start 2P', cursive;
+      color: #fff;
+    }
+
+    .gradient {
+      position: fixed;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0) 80%);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity 0.5s ease-out;
+    }
+
+    .hero {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .videos-section {
+      padding: 4rem 1rem;
+    
+    }
+
+    .video-container {
+      position: relative;
+      padding-top: 56.25%; /* Default to 16:9 aspect ratio */
+    }
+
+    .video-container.portrait {
+      padding-top: 133.33%; /* Adjusted for 3:4 portrait aspect ratio */
+    }
+    a:hover {
+      transform: scale(1.2);
+      box-shadow: 0px 0px 5px #0008ff,
+                     0px 0px 15px #00ff00f0,
+                     0px 0px 30px #00ff0045,
+                     0px 0px 40px #00ff0000;
+    }
+    .video-container iframe,
+    .video-container video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    footer {
+      text-align: center;
+      padding: 10px;
+      background-color: #1b1b1b27;
+      color: #ffffff;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Gradient Effect -->
+  <div class="gradient"></div>
+
+  <!-- Hero Section -->
+  <div class="hero">
+    <div>
+      <h1>Welcome to My Video Editing <br>ZONE</h1>
+      <p>Explore my work in Video Editing and beyond!</p>
+      <a href="#videos" class="btn btn-outline-light">Learn More</a>
+    </div>
+  </div>
+
+  <!-- Videos Section -->
+  <div id="videos" class="videos-section bg-dark text-center">
+    <h2>My Videos</h2>
+    <p>Click to explore my featured video projects:</p>
+    <div class="accordion" id="videoAccordion">
+      <!-- Video 1 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+            REVAMP - SPRITE
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#videoAccordion">
+          <div class="accordion-body">
+            <div class="video-container">
+              <video controls>
+                <source src="videos/ZERO SUGAR AD.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <p>Did complete rebranding of SPRITE, from revamping the logo to making the ad.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Video 2 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingTwo">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            Lyrical Video
+          </button>
+        </h2>
+        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#videoAccordion">
+          <div class="accordion-body">
+            <div class="video-container portrait">
+              <video controls>
+                <source src="videos/2Theses tears.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <p>Made this using Blender (modeling, texturing, animation) and composited in After Effects.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Video 3 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingThree">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            Motion Graphics
+          </button>
+        </h2>
+        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#videoAccordion">
+          <div class="accordion-body">
+            <div class="video-container portrait">
+              <video controls>
+                <source src="videos/motion.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <p>Explored the world of motion graphics in After Effects.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript for Gradient Effect -->
+  <script>
+    const gradient = document.querySelector('.gradient');
+    let fadeTimeout;
+
+    const showGradient = (x, y) => {
+      clearTimeout(fadeTimeout);
+      gradient.style.left = `${x}px`;
+      gradient.style.top = `${y}px`;
+      gradient.style.opacity = 1;
+    };
+
+    const fadeOutGradient = () => {
+      fadeTimeout = setTimeout(() => {
+        gradient.style.opacity = 0;
+      }, 100);
+    };
+
+    document.addEventListener('mousemove', (event) => {
+      const { clientX, clientY, target } = event;
+
+      if (target.tagName === 'VIDEO') {
+        return; // Prevent fade-out over videos
+      }
+
+      showGradient(clientX, clientY);
+      fadeOutGradient();
+    });
+  </script>
+
+  <!-- Smooth Scroll -->
+  <script>
+    document.querySelector('a[href="#videos"]').addEventListener('click', function (e) {
+      e.preventDefault();
+      document.querySelector('#videos').scrollIntoView({ behavior: 'smooth' });
+    });
+  </script>
+
+  <!-- Bootstrap Script -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+<footer>
+  &copy; 2024 Keshav. All rights reserved.
+</footer>
+</html>
